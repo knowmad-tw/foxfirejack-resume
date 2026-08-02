@@ -1408,15 +1408,6 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
     });
   });
 })();
-  document.querySelectorAll('.pillar,.course-card,.stats-row,details.year-block,.edu-list,.logo-cell').forEach(el => {
-    el.classList.add('spot');
-    el.addEventListener('pointermove', e => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    });
-  });
-})();
 (function(){
   const DATA = {
     exp: {
