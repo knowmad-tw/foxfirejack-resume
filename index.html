@@ -20,7 +20,7 @@
 <script>
 (function(){
   const saved = localStorage.getItem('theme');
-  const theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const theme = saved || 'dark';
   document.documentElement.setAttribute('data-theme', theme);
   addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('theme-toggle');
@@ -1195,8 +1195,53 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
   </div>
 </section>
 
+<!-- ===== 媒體與專訪 ===== -->
+<section id="media">
+  <div class="container">
+    <div class="eyebrow">MEDIA</div>
+    <h2>媒體與專訪</h2>
+    <div class="media-grid">
+      <a class="media-card" href="https://www.managertoday.com.tw/podcast/view/681" target="_blank" rel="noopener">
+        <span class="m-src">經理人｜職場來一課</span>
+        <span class="m-title">EP413 專訪知識遊牧創辦人彭其捷：多嘗試，才能找到最適合的 AI 應用方式</span>
+        <span class="m-year">Podcast 專訪・2024</span>
+      </a>
+      <a class="media-card" href="https://blog.hahow.in/teacher-nterview-tableau/" target="_blank" rel="noopener">
+        <span class="m-src">Hahow 好學校</span>
+        <span class="m-title">講師專訪：提倡「數據導向」思維，幫助人們活出更理想的人生</span>
+        <span class="m-year">專訪報導</span>
+      </a>
+      <a class="media-card" href="https://podcasts.apple.com/us/podcast/id1536696801?i=1000651135636" target="_blank" rel="noopener">
+        <span class="m-src">徵信話大冒險</span>
+        <span class="m-title">Ep367《線上教學×課程製作全攻略》作者專訪</span>
+        <span class="m-year">Podcast 專訪・2024</span>
+      </a>
+      <a class="media-card" href="https://medium.com/twdsmeetup/chatgpt-%E8%88%87%E8%B3%87%E6%96%99%E8%A6%96%E8%A6%BA%E5%8C%96-df51ab7adcf6" target="_blank" rel="noopener">
+        <span class="m-src">台灣資料科學社群 TWDS</span>
+        <span class="m-title">ChatGPT 與資料視覺化：講座紀錄</span>
+        <span class="m-year">講座報導・2023</span>
+      </a>
+      <a class="media-card" href="https://blog.tibame.com/?p=24197" target="_blank" rel="noopener">
+        <span class="m-src">緯育 TibaMe Blog</span>
+        <span class="m-title">社畜的報表救星！3 招用 AI 幫你數據分析、快速決策</span>
+        <span class="m-year">報導・2025</span>
+      </a>
+      <div class="media-card">
+        <span class="m-src">資料科學家的工作日常</span>
+        <span class="m-title">商業數據分析師的一天：AI 如何改寫工作流程</span>
+        <span class="m-year">Podcast 受訪・2025</span>
+      </div>
+      <div class="media-card">
+        <span class="m-src">優渥誌</span>
+        <span class="m-title">數據分析工具專題：專家受訪</span>
+        <span class="m-year">雜誌受訪・2021</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== 精選文章 ===== -->
-<section id="articles">
+<section id="articles" class="section-alt">
   <div class="container">
     <div class="eyebrow">WRITING</div>
     <h2>精選文章</h2>
@@ -1226,35 +1271,6 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
   </div>
 </section>
 
-<!-- ===== 媒體與專訪 ===== -->
-<section id="media" class="section-alt">
-  <div class="container">
-    <div class="eyebrow">MEDIA</div>
-    <h2>媒體與專訪</h2>
-    <div class="media-grid">
-      <a class="media-card" href="https://blog.hahow.in/teacher-nterview-tableau/" target="_blank" rel="noopener">
-        <span class="m-src">Hahow 好學校</span>
-        <span class="m-title">講師專訪：把數據變決策的 Tableau 老師</span>
-        <span class="m-year">專訪報導</span>
-      </a>
-      <a class="media-card" href="https://medium.com/twdsmeetup/chatgpt-%E8%88%87%E8%B3%87%E6%96%99%E8%A6%96%E8%A6%BA%E5%8C%96-df51ab7adcf6" target="_blank" rel="noopener">
-        <span class="m-src">台灣資料科學社群 TWDS</span>
-        <span class="m-title">ChatGPT 與資料視覺化：講座紀錄</span>
-        <span class="m-year">講座報導</span>
-      </a>
-      <div class="media-card">
-        <span class="m-src">資料科學家的工作日常</span>
-        <span class="m-title">商業數據分析師的一天：AI 如何改寫工作流程</span>
-        <span class="m-year">Podcast 受訪・2025</span>
-      </div>
-      <div class="media-card">
-        <span class="m-src">優渥誌</span>
-        <span class="m-title">數據分析工具專題：專家受訪</span>
-        <span class="m-year">雜誌受訪・2021</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ===== 合作方式 ===== -->
 <section id="services">
