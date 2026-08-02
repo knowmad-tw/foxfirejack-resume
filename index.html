@@ -661,6 +661,39 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
 [data-theme="dark"] .nav-logo img{filter:brightness(0) invert(1)}
 [data-theme="dark"] h2{color:var(--text)}
 [data-theme="dark"] .spot::after{background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(159,195,232,.12), transparent 62%)}
+
+/* ===== Inquiry form ===== */
+.iq-form{display:flex;flex-direction:column;gap:14px;text-align:left}
+.iq-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.iq-row{grid-template-columns:1fr}}
+.iq-field{display:flex;flex-direction:column;gap:6px}
+.iq-field label{font-size:13.5px;font-weight:600;color:var(--text-secondary)}
+.iq-field label b{color:#E85444}
+.iq-field input,.iq-field select,.iq-field textarea{
+  font-family:inherit;font-size:15px;color:var(--text);
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(0,0,0,.18);border-radius:12px;
+  padding:12px 14px;outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.iq-field textarea{min-height:110px;resize:vertical}
+.iq-field input:focus,.iq-field select:focus,.iq-field textarea:focus{
+  border-color:var(--primary-link);box-shadow:0 0 0 3px rgba(14,120,164,.15);
+}
+.iq-submit{
+  margin-top:4px;height:50px;border:none;border-radius:999px;cursor:pointer;
+  font-family:inherit;font-size:17px;font-weight:600;color:#fff;
+  background:linear-gradient(180deg,#2c4180 0%,#233363 100%);
+  box-shadow:0 10px 24px rgba(35,51,99,.3);
+  transition:transform .2s,box-shadow .2s;
+}
+.iq-submit:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(35,51,99,.38)}
+.iq-note{font-size:12.5px;color:var(--text-secondary);text-align:center;line-height:1.6}
+[data-theme="dark"] .iq-field input,[data-theme="dark"] .iq-field select,[data-theme="dark"] .iq-field textarea{
+  background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:var(--text);
+}
+[data-theme="dark"] .iq-field input:focus,[data-theme="dark"] .iq-field select:focus,[data-theme="dark"] .iq-field textarea:focus{
+  border-color:#6db6dd;box-shadow:0 0 0 3px rgba(109,182,221,.18);
+}
 </style>
 </head>
 <body>
@@ -1309,7 +1342,7 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
     <h2>企業內訓・演講邀約・顧問合作</h2>
     <p>Tableau 工具導入、數據分析與視覺化、系統 UI/UX 設計、人工智慧導入——歡迎來信洽談。</p>
     <div class="contact-links">
-      <a class="chip chip--primary" href="mailto:foxfirejack@gmail.com">✉️ foxfirejack@gmail.com</a>
+      <button class="chip chip--primary" data-modal="inquiry" type="button">✉️ 合作洽詢・foxfirejack@gmail.com</button>
       <span class="chip">💬 Line ID：divaka</span>
       <a class="chip" href="https://www.visualization.tw/" target="_blank" rel="noopener">🌐 visualization.tw</a>
       <a class="chip" href="https://www.tableau.tw/" target="_blank" rel="noopener">📊 tableau.tw 部落格</a>
@@ -1409,6 +1442,8 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
   });
 })();
 (function(){
+  // 知識遊牧寄信 API（Google Apps Script，部署後填入 /exec 網址；空字串 = 退回郵件草稿模式）
+  const MAIL_API_URL = '';
   const DATA = {
     exp: {
       t: '15 年數據領域經驗',
@@ -1456,6 +1491,27 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
       '</ul>'
     }
   };
+  DATA.inquiry = {
+    t: '合作洽詢',
+    s: '填寫後將開啟您的郵件軟體，內容會自動帶入信件草稿',
+    body: '<form class="iq-form" id="iq-form">' +
+      '<div class="iq-row">' +
+        '<div class="iq-field"><label>稱呼 <b>*</b></label><input name="name" required placeholder="怎麼稱呼您？"></div>' +
+        '<div class="iq-field"><label>單位／公司</label><input name="org" placeholder="公司或單位名稱"></div>' +
+      '</div>' +
+      '<div class="iq-row">' +
+        '<div class="iq-field"><label>您的聯絡方式 <b>*</b></label><input name="contact" required placeholder="Email 或電話"></div>' +
+        '<div class="iq-field"><label>合作類型</label><select name="type"><option>企業內訓</option><option>演講邀約</option><option>顧問服務</option><option>其他</option></select></div>' +
+      '</div>' +
+      '<div class="iq-field"><label>需求說明 <b>*</b></label><textarea name="msg" required placeholder="想邀約的主題、對象人數、預計時間、預算範圍等，都歡迎先簡單描述"></textarea></div>' +
+      '<button class="iq-submit" type="submit">產生信件並寄出</button>' +
+      '<div class="iq-note">送出後會開啟您的郵件軟體（信件已寫好，按傳送即可）<br>也歡迎直接來信 <a href="mailto:foxfirejack@gmail.com">foxfirejack@gmail.com</a> 或加 Line：divaka</div>' +
+    '</form>'
+  };
+  if (MAIL_API_URL){
+    DATA.inquiry.s = '填寫送出後將直接寄達，我會盡快回覆您';
+    DATA.inquiry.body = DATA.inquiry.body.replace('產生信件並寄出', '送出洽詢');
+  }
   const bd = document.getElementById('modal-backdrop');
   const content = document.getElementById('modal-content');
   function open(key){
@@ -1463,6 +1519,35 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
     content.innerHTML = '<h3>' + d.t + '</h3><div class="modal-sub">' + d.s + '</div>' + d.body;
     bd.classList.add('open');
     document.body.style.overflow = 'hidden';
+    const form = document.getElementById('iq-form');
+    if (form) form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = new FormData(form);
+      const payload = {
+        name: f.get('name'), org: f.get('org'), contact: f.get('contact'),
+        type: f.get('type'), msg: f.get('msg')
+      };
+      const btn = form.querySelector('.iq-submit');
+      // 尚未設定 API 時退回郵件草稿
+      if (!MAIL_API_URL){
+        const subject = '【' + payload.type + '】合作洽詢 - ' + payload.name + (payload.org ? '（' + payload.org + '）' : '');
+        const body = '稱呼：' + payload.name + '\n單位：' + (payload.org || '—') + '\n聯絡方式：' + payload.contact + '\n合作類型：' + payload.type + '\n\n需求說明：\n' + payload.msg;
+        location.href = 'mailto:foxfirejack@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        return;
+      }
+      btn.disabled = true; btn.textContent = '送出中…';
+      try {
+        const res = await fetch(MAIL_API_URL, { method: 'POST', body: JSON.stringify(payload) });
+        const j = await res.json();
+        if (!j.ok) throw new Error(j.error || 'send failed');
+        content.innerHTML = '<h3>已送出 ✅</h3><div class="modal-sub">感謝您的來信，訊息已寄達，將盡快與您聯繫！</div>' +
+          '<div class="iq-note" style="margin-top:12px">急件也歡迎直接來信 <a href="mailto:foxfirejack@gmail.com">foxfirejack@gmail.com</a> 或加 Line：divaka</div>';
+      } catch (err) {
+        btn.disabled = false; btn.textContent = '產生信件並寄出';
+        const note = form.querySelector('.iq-note');
+        note.innerHTML = '⚠️ 線上送出暫時失敗，請直接來信 <a href="mailto:foxfirejack@gmail.com">foxfirejack@gmail.com</a> 或加 Line：divaka';
+      }
+    });
   }
   function close(){
     bd.classList.remove('open');
