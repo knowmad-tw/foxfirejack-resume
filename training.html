@@ -52,6 +52,7 @@
       <a class="nav-link" href="https://www.visualization.tw/" target="_blank" rel="noopener"><span class="lbl-full">個人網站</span><span class="lbl-short">個人站</span></a>
       <a class="nav-link" href="https://knowmad.tw/" target="_blank" rel="noopener"><span class="lbl-full">知識遊牧官網</span><span class="lbl-short">官網</span></a>
       <a class="nav-link" href="https://www.instagram.com/knowmad.tw/" target="_blank" rel="noopener"><span class="lbl-full">知識遊牧 IG</span><span class="lbl-short">IG</span></a>
+      <a class="nav-link nav-link--cta" href="#contact">聯絡我</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="切換深淺色模式">🌙</button>
     </div>
   </div>
@@ -64,7 +65,10 @@
     <div class="eyebrow">CORPORATE TRAINING &amp; SPEAKING</div>
     <h1 class="page-title">歷年企業內訓與授課紀錄</h1>
     <p class="page-teacher">講師｜<strong>彭其捷 Jack Peng</strong>　資料視覺化 × AI 應用 × 體驗設計</p>
-    <p class="page-lead">從 2015 年到現在，走過金融、科技、製造、零售、醫療、政府與各大專院校。主題從 Tableau 資料視覺化、數據思維，一路延伸到 ChatGPT 與 AI 職場應用。以下是可查詢的完整紀錄，內訓邀約可用來確認過往合作對象與課程規劃方向。</p>
+    <p class="page-lead">從 2015 年到現在，走過金融、科技、製造、零售、醫療、政府與各大專院校。主題從 Tableau 資料視覺化、數據思維，一路延伸到 ChatGPT 與 AI 職場應用。</p>
+    <div class="hero-actions">
+      <a class="btn" href="#contact">內訓邀約・聯絡我 ↓</a>
+    </div>
   </div>
 </header>
 
@@ -84,15 +88,22 @@
 <section id="records" style="padding-top:0">
   <div class="container">
     <div class="eyebrow">FULL RECORDS</div>
-    <h2>依年份與主題查詢</h2>
-    <p class="section-lead">可用上方按鈕篩選課程主題，或直接搜尋機構名稱（例如「金融研訓院」）與課程關鍵字（例如「Excel」）。</p>
+    <h2>授課經歷｜完整清單</h2>
 
-    <div class="tl-filters" id="tl-filters">
-      <button class="tl-filter active" data-f="all">全部</button>
-      <button class="tl-filter" data-f="ai">AI・ChatGPT</button>
-      <button class="tl-filter" data-f="viz">Tableau・視覺化</button>
-      <button class="tl-filter" data-f="data">數據思維・分析</button>
-      <button class="tl-filter" data-f="ux">UX・設計</button>
+    <div class="filter-group">
+      <span class="filter-label">課程主題</span>
+      <div class="tl-filters" id="tl-filters">
+        <button class="tl-filter active" data-f="all">全部</button>
+        <button class="tl-filter" data-f="ai">AI・ChatGPT</button>
+        <button class="tl-filter" data-f="viz">Tableau・視覺化</button>
+        <button class="tl-filter" data-f="data">數據思維・分析</button>
+        <button class="tl-filter" data-f="ux">UX・設計</button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">產業別</span>
+      <div class="tl-filters" id="tl-industries"></div>
     </div>
 
     <div class="tl-toolbar">
@@ -115,7 +126,9 @@
       (function(){
         const wrap = document.getElementById('timeline-wrap');
         Trainings.renderTimeline(wrap, window.TRAINING_DATA, {openAll: true});
+        Trainings.renderIndustryFilters(document.getElementById('tl-industries'), window.TRAINING_DATA);
         Trainings.initFilters(wrap, {
+          industryButtons: '#tl-industries .tl-filter',
           searchInput: document.getElementById('tl-q'),
           counter: document.getElementById('tl-count'),
           empty: document.getElementById('tl-empty')
@@ -138,8 +151,8 @@
 <!-- ===== 合作單位 ===== -->
 <section class="section-alt">
   <div class="container">
-    <div class="eyebrow">CLIENTS</div>
-    <h2>部分合作單位</h2>
+    <div class="eyebrow">PARTNERS</div>
+    <h2>合作夥伴們</h2>
     <div class="logo-wall">
       <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/sinica.webp" alt="中央研究院"></div>
       <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/itri.webp" alt="工業技術研究院"></div>
@@ -160,13 +173,23 @@
       <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/tainan-gov.webp" alt="台南市政府"></div>
       <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/tmu.webp" alt="臺北醫學大學"></div>
       <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/tcvgh.webp" alt="臺中榮民總醫院"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/mediatek.webp" alt="聯發科 MediaTek"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/foxconn.webp" alt="鴻海 Foxconn"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/line.webp" alt="LINE"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/hp.webp" alt="HP"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/tripcom.webp" alt="Trip.com"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/loreal.webp" alt="台灣萊雅 L'Oréal"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/trendmicro.webp" alt="趨勢科技 Trend Micro"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/wistron.webp" alt="緯創 Wistron"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/104.webp" alt="104 人力銀行"></div>
+      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/adobe.webp" alt="美商 Adobe"></div>
     </div>
-    <p class="logo-more">以及 Line・聯發科・鴻海・HP・Trip.com・3M・Momo・元大證券・統一集團・精誠資訊・趨勢科技・富邦金控・國泰金控・中國信託・凱基金控・開發金控・裕隆・緯創・104・台大／清大／政大／師大／北科大 等超過 200 個單位</p>
+    <p class="logo-more">以及 3M・Momo・元大證券・統一集團・精誠資訊・富邦金控・國泰金控・中國信託・凱基金控・開發金控・裕隆・遊戲橘子・光寶科技・遠東新世紀・台大／清大／政大／師大／北科大 等超過 200 個單位</p>
   </div>
 </section>
 
 <!-- ===== 邀約 ===== -->
-<section class="contact">
+<section class="contact" id="contact">
   <div class="container contact-inner">
     <img src="Logo/方-知識遊牧.png" alt="知識遊牧工作室" style="width:72px;filter:drop-shadow(0 12px 32px rgba(0,0,0,.35))">
     <div class="eyebrow" style="color:rgba(246,246,246,.6)">CONTACT</div>

@@ -17,8 +17,10 @@
     opts = opts || {};
     wrap.innerHTML = data.map(y => {
       const open = opts.openAll ? ' open' : (y.open ? ' open' : '');
+      const IND = window.TRAINING_INDUSTRY || {};
       const lis = y.items.map(i =>
-        '<li><span class="tl-org">' + esc(i.org) + '</span>' +
+        '<li data-ind="' + (IND[i.org] || 'other') + '">' +
+        '<span class="tl-org">' + esc(i.org) + '</span>' +
         '<span class="tl-topic">' + esc(i.topic) + '</span>' +
         (i.role ? '<span class="tl-role">' + esc(i.role) + '</span>' : '') +
         '</li>'
@@ -30,6 +32,28 @@
     }).join('');
   }
 
+  /* 依資料統計各產業別場次，畫成可點選的 chips */
+  function renderIndustryFilters(el, data){
+    if (!el || !data) return;
+    const IND = window.TRAINING_INDUSTRY || {};
+    const LABELS = window.TRAINING_INDUSTRY_LABELS || [];
+    const counts = {};
+    let total = 0;
+    data.forEach(y => y.items.forEach(i => {
+      const k = IND[i.org] || 'other';
+      counts[k] = (counts[k] || 0) + 1;
+      total++;
+    }));
+    const chips = ['<button class="tl-filter active" data-i="all">全部<span class="tl-num">' + total + '</span></button>'];
+    LABELS.forEach(l => {
+      if (!counts[l.key]) return;
+      chips.push('<button class="tl-filter" data-i="' + l.key + '">' + esc(l.label) +
+                 '<span class="tl-num">' + counts[l.key] + '</span></button>');
+    });
+    if (counts.other) chips.push('<button class="tl-filter" data-i="other">其他<span class="tl-num">' + counts.other + '</span></button>');
+    el.innerHTML = chips.join('');
+  }
+
   /* 類別按鈕 + （選用）關鍵字搜尋
      opts.searchInput：搜尋框元素
      opts.counter：顯示筆數的元素 */
@@ -39,8 +63,10 @@
     const items = Array.from(wrap.querySelectorAll('.talk-list li'));
     const blocks = Array.from(wrap.querySelectorAll('details.year-block'));
     const openState = blocks.map(b => b.open);
-    const buttons = Array.from(document.querySelectorAll('.tl-filter'));
-    let cat = 'all', kw = '';
+    const buttons = Array.from(document.querySelectorAll('#tl-filters .tl-filter'));
+    const indButtons = opts.industryButtons
+      ? Array.from(document.querySelectorAll(opts.industryButtons)) : [];
+    let cat = 'all', ind = 'all', kw = '';
 
     function apply(){
       const re = cat === 'all' ? null : PATTERNS[cat];
@@ -48,11 +74,13 @@
       let shown = 0;
       items.forEach(li => {
         const text = li.textContent;
-        const hit = (!re || re.test(text)) && (!q || text.toLowerCase().includes(q));
+        const hit = (!re || re.test(text)) &&
+                    (ind === 'all' || li.dataset.ind === ind) &&
+                    (!q || text.toLowerCase().includes(q));
         li.style.display = hit ? '' : 'none';
         if (hit) shown++;
       });
-      const filtering = !!re || !!q;
+      const filtering = !!re || ind !== 'all' || !!q;
       blocks.forEach((b, i) => {
         const any = Array.from(b.querySelectorAll('.talk-list li')).some(li => li.style.display !== 'none');
         b.style.display = any ? '' : 'none';
@@ -71,6 +99,13 @@
       apply();
     }));
 
+    indButtons.forEach(btn => btn.addEventListener('click', () => {
+      indButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      ind = btn.dataset.i;
+      apply();
+    }));
+
     if (opts.searchInput){
       opts.searchInput.addEventListener('input', () => { kw = opts.searchInput.value; apply(); });
     }
@@ -78,5 +113,5 @@
     return { apply, items, blocks };
   }
 
-  window.Trainings = { PATTERNS, renderTimeline, initFilters };
+  window.Trainings = { PATTERNS, renderTimeline, renderIndustryFilters, initFilters };
 })();
