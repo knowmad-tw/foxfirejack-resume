@@ -125,7 +125,7 @@
     <script>
       (function(){
         const wrap = document.getElementById('timeline-wrap');
-        Trainings.renderTimeline(wrap, window.TRAINING_DATA, {openAll: true});
+        Trainings.renderTimeline(wrap, window.TRAINING_DATA, {openYears: ['2026', '2025']});
         Trainings.renderIndustryFilters(document.getElementById('tl-industries'), window.TRAINING_DATA);
         Trainings.initFilters(wrap, {
           industryButtons: '#tl-industries .tl-filter',
@@ -155,36 +155,36 @@
     <h2>深度合作夥伴</h2>
     <p class="section-lead">這些單位不只合作過一次，而是一期接一期持續開課。課綱怎麼調整、學員程度落差怎麼處理、課後要不要安排回訓，都是一路討論出來的。<br>如果你的團隊也在找可以長期配合的講師，很歡迎一起加入。</p>
     <div class="logo-wall">
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/hahow.webp" alt="Hahow"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/bschool.webp" alt="新商業學校"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/managertoday.webp" alt="經理人 Manager Today"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/yanguo.webp" alt="言果學習"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/teachify.webp" alt="Teachify"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/ctbc.webp" alt="中國信託銀行"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/tabf.webp" alt="台灣金融研訓院"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/104.webp" alt="104 人力銀行"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/tibame.webp" alt="緯育 TibaMe"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/tiandiren.webp" alt="天地人學堂"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/ntudac.webp" alt="台大資料分析與決策社"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/timing.webp" alt="太毅國際顧問"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/cathay.webp" alt="國泰集團"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/itri.webp" alt="工業技術研究院"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/iii.webp" alt="資策會"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/ntu.webp" alt="國立臺灣大學"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/ccu.webp" alt="國立中正大學"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/mediatek.webp" alt="聯發科 MediaTek"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/feg.webp" alt="遠東集團"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/systex.webp" alt="精誠集團 SYSTEX"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/cht.webp" alt="中華電信"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/yuantabank.webp" alt="元大銀行"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/firstsec.webp" alt="第一金證券"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/taitra.webp" alt="外貿協會 TAITRA"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/moenv.webp" alt="環境部"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/nycu.webp" alt="國立陽明交通大學"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/ntust.webp" alt="國立臺灣科技大學"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/nkust.webp" alt="國立高雄科技大學"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/fuli.webp" alt="富利餐飲（肯德基・必勝客）"></div>
-      <div class="logo-cell"><img loading="lazy" decoding="async" src="assets/logos/cameo.webp" alt="卡米爾 CAMEO"></div>
+      <div class="logo-cell" data-name="Hahow"><img loading="lazy" decoding="async" src="assets/logos/hahow.webp" alt="Hahow"></div>
+      <div class="logo-cell" data-name="新商業學校"><img loading="lazy" decoding="async" src="assets/logos/bschool.webp" alt="新商業學校"></div>
+      <div class="logo-cell" data-name="經理人"><img loading="lazy" decoding="async" src="assets/logos/managertoday.webp" alt="經理人 Manager Today"></div>
+      <div class="logo-cell" data-name="言果學習"><img loading="lazy" decoding="async" src="assets/logos/yanguo.webp" alt="言果學習"></div>
+      <div class="logo-cell" data-name="Teachify"><img loading="lazy" decoding="async" src="assets/logos/teachify.webp" alt="Teachify"></div>
+      <div class="logo-cell" data-name="中國信託銀行"><img loading="lazy" decoding="async" src="assets/logos/ctbc.webp" alt="中國信託銀行"></div>
+      <div class="logo-cell" data-name="台灣金融研訓院"><img loading="lazy" decoding="async" src="assets/logos/tabf.webp" alt="台灣金融研訓院"></div>
+      <div class="logo-cell" data-name="104 人力銀行"><img loading="lazy" decoding="async" src="assets/logos/104.webp" alt="104 人力銀行"></div>
+      <div class="logo-cell" data-name="緯育 TibaMe"><img loading="lazy" decoding="async" src="assets/logos/tibame.webp" alt="緯育 TibaMe"></div>
+      <div class="logo-cell" data-name="天地人學堂"><img loading="lazy" decoding="async" src="assets/logos/tiandiren.webp" alt="天地人學堂"></div>
+      <div class="logo-cell" data-name="台大資料分析與決策社"><img loading="lazy" decoding="async" src="assets/logos/ntudac.webp" alt="台大資料分析與決策社"></div>
+      <div class="logo-cell" data-name="太毅國際顧問"><img loading="lazy" decoding="async" src="assets/logos/timing.webp" alt="太毅國際顧問"></div>
+      <div class="logo-cell" data-name="國泰集團"><img loading="lazy" decoding="async" src="assets/logos/cathay.webp" alt="國泰集團"></div>
+      <div class="logo-cell" data-name="工業技術研究院"><img loading="lazy" decoding="async" src="assets/logos/itri.webp" alt="工業技術研究院"></div>
+      <div class="logo-cell" data-name="資策會"><img loading="lazy" decoding="async" src="assets/logos/iii.webp" alt="資策會"></div>
+      <div class="logo-cell" data-name="國立臺灣大學"><img loading="lazy" decoding="async" src="assets/logos/ntu.webp" alt="國立臺灣大學"></div>
+      <div class="logo-cell" data-name="國立中正大學"><img loading="lazy" decoding="async" src="assets/logos/ccu.webp" alt="國立中正大學"></div>
+      <div class="logo-cell" data-name="聯發科 MediaTek"><img loading="lazy" decoding="async" src="assets/logos/mediatek.webp" alt="聯發科 MediaTek"></div>
+      <div class="logo-cell" data-name="遠東集團"><img loading="lazy" decoding="async" src="assets/logos/feg.webp" alt="遠東集團"></div>
+      <div class="logo-cell" data-name="精誠集團 SYSTEX"><img loading="lazy" decoding="async" src="assets/logos/systex.webp" alt="精誠集團 SYSTEX"></div>
+      <div class="logo-cell" data-name="中華電信"><img loading="lazy" decoding="async" src="assets/logos/cht.webp" alt="中華電信"></div>
+      <div class="logo-cell" data-name="元大銀行"><img loading="lazy" decoding="async" src="assets/logos/yuantabank.webp" alt="元大銀行"></div>
+      <div class="logo-cell" data-name="第一金證券"><img loading="lazy" decoding="async" src="assets/logos/firstsec.webp" alt="第一金證券"></div>
+      <div class="logo-cell" data-name="外貿協會 TAITRA"><img loading="lazy" decoding="async" src="assets/logos/taitra.webp" alt="外貿協會 TAITRA"></div>
+      <div class="logo-cell" data-name="環境部"><img loading="lazy" decoding="async" src="assets/logos/moenv.webp" alt="環境部"></div>
+      <div class="logo-cell" data-name="國立陽明交通大學"><img loading="lazy" decoding="async" src="assets/logos/nycu.webp" alt="國立陽明交通大學"></div>
+      <div class="logo-cell" data-name="國立臺灣科技大學"><img loading="lazy" decoding="async" src="assets/logos/ntust.webp" alt="國立臺灣科技大學"></div>
+      <div class="logo-cell" data-name="國立高雄科技大學"><img loading="lazy" decoding="async" src="assets/logos/nkust.webp" alt="國立高雄科技大學"></div>
+      <div class="logo-cell" data-name="富利餐飲 KFC・必勝客"><img loading="lazy" decoding="async" src="assets/logos/fuli.webp" alt="富利餐飲（肯德基・必勝客）"></div>
+      <div class="logo-cell" data-name="卡米爾 CAMEO"><img loading="lazy" decoding="async" src="assets/logos/cameo.webp" alt="卡米爾 CAMEO"></div>
     </div>
     <p class="logo-more">其餘合作單位包含 Line・鴻海・HP・Trip.com・3M・Momo・元大證券・統一集團・趨勢科技・富邦金控・凱基金控・開發金控・裕隆・緯創・中研院・工研院・清大／政大／師大／北科大 等超過 200 個單位</p>
   </div>

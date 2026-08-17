@@ -251,17 +251,36 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 .stat .label{font-size:14px;color:var(--text-secondary)}
 .logo-wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:var(--spacing--30)}
 .logo-wall .logo-cell{
+  position:relative;overflow:hidden;
   background:rgba(255,255,255,.72);
   backdrop-filter:blur(16px) saturate(160%);
   -webkit-backdrop-filter:blur(16px) saturate(160%);
   border-radius:16px;border:1px solid var(--glass-border);
   box-shadow:0 8px 22px rgba(35,51,99,.06), var(--glass-inset);
   display:flex;align-items:center;justify-content:center;padding:14px;height:78px;
-  transition:transform .2s,box-shadow .2s;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
 }
-.logo-wall .logo-cell:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(35,51,99,.12), var(--glass-inset)}
-.logo-wall img{max-height:44px;max-width:100%;object-fit:contain;filter:grayscale(1);opacity:.85;transition:filter .2s,opacity .2s}
-.logo-wall .logo-cell:hover img{filter:none;opacity:1}
+.logo-wall .logo-cell:hover{
+  transform:translateY(-4px);
+  border-color:rgba(46,126,166,.45);
+  box-shadow:0 16px 34px rgba(35,51,99,.16), var(--glass-inset);
+}
+.logo-wall img{max-height:44px;max-width:100%;object-fit:contain;filter:grayscale(1);opacity:.85;transition:filter .25s,opacity .25s,transform .25s}
+.logo-wall .logo-cell:hover img{filter:none;opacity:1;transform:translateY(-11px) scale(.86)}
+.logo-wall .logo-cell::after{
+  content:attr(data-name);
+  position:absolute;left:8px;right:8px;bottom:7px;
+  text-align:center;font-size:11px;font-weight:600;letter-spacing:.02em;line-height:1.3;
+  color:#233363;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  opacity:0;transform:translateY(9px);
+  transition:opacity .25s,transform .25s;
+  pointer-events:none;
+}
+.logo-wall .logo-cell:hover::after{opacity:1;transform:translateY(0)}
+@media (hover:none){
+  .logo-wall .logo-cell:hover img{transform:none}
+  .logo-wall .logo-cell::after{display:none}
+}
 .logo-more{margin-top:var(--spacing--40);font-size:14px;color:var(--text-secondary);text-align:center}
 
 /* ===== Timeline ===== */

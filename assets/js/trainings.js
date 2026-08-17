@@ -11,12 +11,15 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
   /* 把資料畫成 details.year-block 結構
-     opts.openAll：全部年份預設展開（獨立頁面用） */
+     opts.openAll：全部年份預設展開
+     opts.openYears：指定預設展開的年份陣列（例：['2026','2025']） */
   function renderTimeline(wrap, data, opts){
     if (!wrap || !data) return;
     opts = opts || {};
     wrap.innerHTML = data.map(y => {
-      const open = opts.openAll ? ' open' : (y.open ? ' open' : '');
+      const open = opts.openAll ? ' open'
+        : opts.openYears ? (opts.openYears.indexOf(String(y.year)) !== -1 ? ' open' : '')
+        : (y.open ? ' open' : '');
       const IND = window.TRAINING_INDUSTRY || {};
       const lis = y.items.map(i =>
         '<li data-ind="' + (IND[i.org] || 'other') + '">' +
