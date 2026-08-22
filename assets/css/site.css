@@ -78,26 +78,26 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 /* ===== Hero（light liquid） ===== */
 .hero{
   position:relative;
-  padding:calc(var(--spacing--80) + 1.5rem) 0 var(--spacing--80);
+  padding:calc(var(--spacing--70) + 1rem) 0 var(--spacing--60);
 }
-.hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--spacing--40)}
+.hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--spacing--30)}
 .hero-avatar{
-  width:188px;height:188px;border-radius:50%;object-fit:cover;
+  width:150px;height:150px;border-radius:50%;object-fit:cover;
   border:5px solid rgba(255,255,255,.85);
   box-shadow:0 24px 60px rgba(35,51,99,.25), inset 0 1px 0 rgba(255,255,255,.9);
 }
 .hero .eyebrow{margin-bottom:0}
 .hero h1{
-  font-size:clamp(44px,6.5vw,76px);font-weight:700;line-height:1.05;letter-spacing:-.03em;
+  font-size:clamp(40px,5.6vw,64px);font-weight:700;line-height:1.05;letter-spacing:-.03em;
   background:linear-gradient(135deg,#1a274a 20%,#233363 55%,#2E7EA6 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .hero h1 small{
   display:block;font-size:clamp(16px,2.2vw,22px);font-weight:600;letter-spacing:.45em;
   color:var(--text-secondary);-webkit-text-fill-color:var(--text-secondary);
-  margin-top:var(--spacing--30);
+  margin-top:var(--spacing--20);
 }
-.hero-sub{font-size:clamp(18px,2.2vw,23px);color:var(--text-secondary);line-height:1.6;max-width:680px;font-weight:500}
+.hero-sub{font-size:clamp(17px,2vw,21px);color:var(--text-secondary);line-height:1.55;max-width:680px;font-weight:500}
 .hero-chips{display:flex;flex-wrap:wrap;gap:var(--spacing--30);justify-content:center}
 .chip{
   padding:9px 20px;border-radius:999px;font-size:15px;color:var(--text);
@@ -166,6 +166,18 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 .pillar-num{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--primary-light);margin-bottom:var(--spacing--30)}
 .pillar h3{font-size:20px;margin-bottom:var(--spacing--20);color:var(--primary)}
 .pillar p{font-size:15px;color:var(--text-secondary);line-height:1.65}
+
+/* ===== 主軸 cards：accent 版（icon 磚 + 配色光暈） ===== */
+.pillar.accent{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:var(--spacing--20)}
+.pillar.accent::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--c-accent);opacity:.9}
+.pillar.accent::after{content:"";position:absolute;width:220px;height:220px;right:-80px;top:-80px;border-radius:50%;background:radial-gradient(closest-side,var(--c-glow),transparent 70%);opacity:.55;pointer-events:none;transition:opacity .3s,transform .3s}
+.pillar.accent:hover::after{opacity:.9;transform:scale(1.12)}
+.pillar.accent>*{position:relative}
+.pillar-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--c-accent);color:#fff;box-shadow:0 10px 22px var(--c-glow), inset 0 1px 0 rgba(255,255,255,.35);margin-bottom:var(--spacing--20);transition:transform .25s}
+.pillar.accent:hover .pillar-ico{transform:scale(1.06) rotate(-3deg)}
+.pillar-ico svg{width:23px;height:23px}
+.pillar.accent .pillar-num{margin-bottom:2px}
+.pillar.accent h3{margin-bottom:var(--spacing--20)}
 
 /* ===== 顧問服務 cards ===== */
 .consult-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing--40)}
