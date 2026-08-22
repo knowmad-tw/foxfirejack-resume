@@ -194,6 +194,23 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 .pillar.accent .pillar-num{margin-bottom:2px}
 .pillar.accent h3{margin-bottom:var(--spacing--20)}
 
+/* ===== FAQ ===== */
+.faq-list{display:grid;gap:var(--spacing--30);max-width:860px}
+.faq-item{
+  background:var(--glass);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid var(--glass-border);border-radius:var(--radius-md);box-shadow:var(--glass-shadow), var(--glass-inset);
+  padding:0 var(--spacing--40);transition:box-shadow .25s}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:14px;padding:18px 0;font-weight:700;font-size:17px;color:var(--primary)}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;background:rgba(35,51,99,.08);
+  background-image:linear-gradient(var(--primary-mid),var(--primary-mid)),linear-gradient(var(--primary-mid),var(--primary-mid));
+  background-size:10px 2px,2px 10px;background-position:center;background-repeat:no-repeat;transition:transform .25s}
+.faq-item[open] summary::before{transform:rotate(45deg)}
+.faq-a{padding:0 0 18px 36px}
+.faq-a p{font-size:15.5px;color:var(--text-secondary);line-height:1.75}
+[data-theme="dark"] .faq-item summary{color:#cfe0f2}
+[data-theme="dark"] .faq-item summary::before{background-color:rgba(159,195,232,.12)}
+
 /* ===== 顧問服務 cards ===== */
 .consult-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing--40)}
 @media(max-width:760px){.consult-grid{grid-template-columns:1fr}}

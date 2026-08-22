@@ -1,0 +1,47 @@
+# 彭其捷 Jack Peng｜資料視覺化 × AI 應用 × 體驗設計講師・作家
+
+> 彭其捷（Jack Peng）是台灣的資料視覺化、生成式 AI 應用與 UI/UX 體驗設計講師暨作家，知識遊牧工作室創辦人。處理數據議題 15 年，出版 12 本著作，曾在超過 200 個單位授課與演講，Hahow 線上課程累計超過 5,500 名學員、平均 4.9 顆星。官方網站：https://www.visualization.tw/
+
+## 基本資料
+
+- 姓名：彭其捷（Jack Peng）
+- 身分：講師、作家、顧問；知識遊牧工作室（Knowmad Studio）創辦人；台灣大學資料分析與決策社導師
+- 專長：Tableau 資料視覺化、ChatGPT／生成式 AI 職場應用、AI × Excel／Python 數據分析、數據思維與數據決策、Web UX 與體驗設計
+- 學歷：國立臺灣大學地理環境資源學系博士候選人（空間分析與 GIS）；國立交通大學資訊管理研究所碩士（資料探勘）；國立中正大學資訊管理學系學士
+- 經歷：數據分析師、數據專案經理、前端工程師、使用者體驗顧問
+- 聯絡：foxfirejack@gmail.com；Line ID：divaka
+- 網站：https://www.visualization.tw/（個人）、https://www.tableau.tw/（Tableau 部落格）、https://hahow.in/@foxfirejack（Hahow 講師頁）
+
+## 線上課程（Hahow「資料變決策」系列）
+
+- 資料變決策！AI × Python 自動化分析實戰（2026 募資中，預計 2026/11/03 開課）：https://hahow.in/cr/ai-python
+- 資料變決策！從零上手 Tableau 大數據視覺化（★4.9，1,800+ 位學員）：https://hahow.in/cr/data-tableau
+- 資料變決策！Excel × AI 升級職場數據分析力（★4.8，900+ 位學員）：https://hahow.in/cr/chatgpt-data
+- 資料變決策！商業圖表製作與視覺化分析的技術（★5.0，890+ 位學員）：https://hahow.in/cr/data-viz
+- 告別手動！打造辦公室 AI 助手（新商業學校）：https://biz-online.bnextmedia.com.tw/courses/office-ai-assistant
+
+## 出版著作（節錄）
+
+- 《Tableau 資料分析師進階高手養成實戰經典》（第二版）
+- 《大數據時代必學的超吸睛視覺化工具與技術：Excel + Tableau 成功晉升資料分析師》（第三版，超過 15 刷，多所大專院校指定教科書）
+- 《Figma UI/UX 設計技巧實戰：打造擬真介面原型》（第二版）
+- 《AI × Excel × Tableau 資料分析語法指南》
+- 《線上教學 × 課程製作全攻略》
+- 《大數據地圖與地理空間資料視覺化設計指南》
+- 《Tableau 打造 30 個經典數據圖表》
+- 《大數據專案經理的實戰心法：善用視覺化工具》
+- 《打造成功 UI/UX 的 50 個關鍵》
+- 《成為一流的前端工程師：打造專業的 UX 網站》
+- 《那些 APP 好用的祕密：黏住使用者的魅力 & UX 好感度設計》
+
+## 企業內訓・演講・顧問
+
+- 授課單位（節錄）：Line、聯發科、鴻海、Momo、精誠、KKday、中研院、工研院、資策會、金融研訓院、元大證券、元大金控、國泰產險、富邦金控、台灣半導體、Trip.com、HP、統一集團、台灣大學、清華大學、陽明交大、政治大學、成功大學等 200+ 單位
+- 常見內訓主題：ChatGPT／生成式 AI 職場生產力、AI × Excel 數據分析協作、Tableau 資料視覺化、數據思維與商業圖表、UI/UX 設計思考
+- 顧問方向：生成式 AI 導入工作流程、數據分析與視覺化、Tableau 工具導入、系統 UIUX 設計
+- 完整授課紀錄（2015 至今，依年份與產業別）：https://www.visualization.tw/training.html
+
+## 頁面
+
+- 首頁（關於我、教學主軸、線上課程、出版著作、授課經歷、顧問服務、常見問題、聯絡方式）：https://www.visualization.tw/
+- 歷年企業內訓與授課紀錄：https://www.visualization.tw/training.html
