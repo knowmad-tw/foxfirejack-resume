@@ -1,0 +1,14 @@
+#!/bin/sh
+# Git pre-commit hook（由 scripts/install-hooks.sh 安裝到 .git/hooks/pre-commit）
+# 1) 改了 assets/data/trainings.js 就自動重跑預渲染，並把 index.html / training.html 一起加進 commit
+# 2) 新增圖片時自動補 width/height
+cd "$(git rev-parse --show-toplevel)" || exit 1
+if git diff --cached --name-only | grep -q '^assets/data/trainings.js$'; then
+  echo "[pre-commit] trainings.js 有變更 → 重新預渲染授課紀錄"
+  node scripts/prerender-trainings.js || exit 1
+  git add index.html training.html
+fi
+if git diff --cached --name-only | grep -qE '^(index|training)\.html$|^en/index\.html$'; then
+  python3 scripts/add-img-dimensions.py >/dev/null 2>&1 && git add index.html training.html
+fi
+exit 0
