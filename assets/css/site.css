@@ -222,6 +222,18 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 .faq-item[open] summary::before{transform:rotate(45deg)}
 .faq-a{padding:0 0 18px 36px}
 .faq-a p{font-size:15.5px;color:var(--text-secondary);line-height:1.75}
+.faq-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.faq-cta .mini{
+  display:inline-flex;align-items:center;gap:4px;font-family:inherit;cursor:pointer;
+  font-size:13px;font-weight:600;line-height:1;padding:8px 13px;border-radius:999px;
+  color:var(--primary);background:rgba(35,51,99,.06);border:1px solid rgba(35,51,99,.14);
+  transition:background .2s,color .2s,border-color .2s,transform .2s;text-decoration:none}
+.faq-cta .mini:hover{background:var(--primary);border-color:var(--primary);color:#fff;transform:translateY(-1px);text-decoration:none}
+.faq-cta .mini--primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.faq-cta .mini--primary:hover{background:#2E7EA6;border-color:#2E7EA6}
+[data-theme="dark"] .faq-cta .mini{color:#cfe0f2;background:rgba(159,195,232,.1);border-color:rgba(159,195,232,.18)}
+[data-theme="dark"] .faq-cta .mini:hover,[data-theme="dark"] .faq-cta .mini--primary{background:#4A9CBF;border-color:#4A9CBF;color:#fff}
+[data-theme="dark"] .faq-cta .mini--primary:hover{background:#6db6dd;border-color:#6db6dd}
 [data-theme="dark"] .faq-item summary{color:#cfe0f2}
 [data-theme="dark"] .faq-item summary::before{background-color:rgba(159,195,232,.12)}
 
