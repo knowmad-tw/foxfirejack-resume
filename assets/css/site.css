@@ -441,13 +441,14 @@ details.year-block summary .count{font-size:14px;font-weight:500;color:var(--tex
   -webkit-backdrop-filter:blur(8px);
 }
 .contact-links a.chip:hover{background:rgba(255,255,255,.16);text-decoration:none}
-.contact-links .chip--primary{
-  background:#fff;color:var(--primary);font-weight:700;font-size:16px;
-  padding:12px 26px;border-color:#fff;
+.contact-links .chip--primary,[data-theme="dark"] .contact-links .chip--primary{
+  background:#fff;color:#233363;font-weight:700;font-size:16px;
+  padding:13px 28px;border-color:#fff;
   box-shadow:0 14px 34px rgba(0,0,0,.3);
   transition:transform .2s,box-shadow .2s;
 }
-.contact-links a.chip--primary:hover{background:#fff;transform:translateY(-2px);box-shadow:0 20px 44px rgba(0,0,0,.36)}
+.contact-links .chip--primary:hover{background:#fff;color:#233363;transform:translateY(-2px);box-shadow:0 20px 44px rgba(0,0,0,.36)}
+.contact-links .chip--primary::after{color:#2E7EA6}
 .contact .btn{background:#fff;color:var(--primary);box-shadow:0 14px 34px rgba(0,0,0,.3)}
 .contact .btn:hover{box-shadow:0 20px 44px rgba(0,0,0,.36)}
 
