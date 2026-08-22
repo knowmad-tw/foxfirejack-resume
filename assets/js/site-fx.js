@@ -59,3 +59,43 @@
     io.observe(el);
   });
 })();
+
+/* 點擊複製（data-copy="要複製的文字"）＋ 底部提示 */
+(function(){
+  let toast, timer;
+  function showToast(msg){
+    if (!toast){
+      toast = document.createElement('div');
+      toast.className = 'copy-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+  async function copyText(text){
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand('copy'); } catch(_){}
+      ta.remove(); return ok;
+    }
+  }
+  document.addEventListener('click', async e => {
+    const el = e.target.closest('[data-copy]');
+    if (!el) return;
+    e.preventDefault();
+    const text = el.getAttribute('data-copy');
+    el.classList.add('copied');
+    setTimeout(() => el.classList.remove('copied'), 1200);
+    showToast('已複製 ' + text + ' ✓');
+    const ok = await copyText(text);
+    if (!ok) showToast('複製失敗，請手動選取：' + text);
+  });
+})();
