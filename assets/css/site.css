@@ -146,6 +146,9 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:var(--spacing--70);align-items:start}
 @media(max-width:820px){.about-grid{grid-template-columns:1fr}}
 .about-text p{margin-bottom:var(--spacing--40);color:#26262c}
+.about-text .about-lead{font-size:19px;line-height:1.75;font-weight:500}
+.about-text strong{color:var(--primary);font-weight:700}
+.about-quote{margin:0 0 var(--spacing--40);padding:14px 20px;border-left:3px solid var(--primary-light);background:rgba(74,156,191,.08);border-radius:0 14px 14px 0;color:var(--text-secondary);font-size:15.5px;line-height:1.75}
 .about-photo{
   border-radius:var(--radius-lg);overflow:hidden;
   border:1px solid var(--glass-border);
@@ -672,6 +675,8 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
 [data-theme="dark"] .hero-avatar-wrap::before{background:radial-gradient(closest-side,rgba(74,156,191,.6),rgba(106,92,255,.3) 55%,transparent 72%)}
 [data-theme="dark"] .hero-sub b{color:#9fc3e8}
 [data-theme="dark"] .about-text p{color:#c9cdda}
+[data-theme="dark"] .about-text strong{color:#9fc3e8}
+[data-theme="dark"] .about-quote{background:rgba(74,156,191,.12);color:#b7c4d6}
 [data-theme="dark"] .edu-list li + li{border-top-color:rgba(255,255,255,.08)}
 [data-theme="dark"] .edu-degree{color:#9fc3e8}
 [data-theme="dark"] .pillar h3{color:#cfe0f2}
