@@ -67,15 +67,17 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 }
 .nav-logo{display:flex;align-items:center;gap:10px}
 .nav-logo img{height:30px;width:auto}
-.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links li{display:flex;align-items:center}
 .nav-links a{
+  display:inline-flex;align-items:center;height:38px;line-height:1;
   color:#141418;font-size:15px;font-weight:600;
-  padding:9px 16px;border-radius:999px;transition:background .2s,color .2s;
+  padding:0 16px;border-radius:999px;transition:background .2s,color .2s;
 }
 .nav-links a:hover,.nav-links a.active{background:var(--primary);color:#fff;text-decoration:none}
 /* 語言切換：和一般導覽項目區分 */
 .nav-links a.nav-lang{
-  margin-left:6px;padding:7px 12px 7px 10px;font-size:12.5px;font-weight:700;letter-spacing:.08em;
+  margin-left:6px;height:32px;padding:0 12px 0 10px;font-size:12.5px;font-weight:700;letter-spacing:.08em;
   color:var(--primary-mid);border:1px solid rgba(46,126,166,.45);background:rgba(46,126,166,.08);
   display:inline-flex;align-items:center;gap:5px}
 .nav-links a.nav-lang::before{content:"";width:14px;height:14px;border-radius:50%;flex:none;
@@ -211,25 +213,23 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 .pillar h3{font-size:20px;margin-bottom:var(--spacing--20);color:var(--primary)}
 .pillar p{font-size:15px;color:var(--text-secondary);line-height:1.65}
 
-/* ===== About：DATA × AI × UX 小磚（延伸主視覺） ===== */
-.about-dna{margin-top:var(--spacing--40);display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:relative}
-.about-dna::before{content:"";position:absolute;left:12%;right:12%;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(74,156,191,.45),transparent);z-index:0}
-.dna-item{
-  position:relative;overflow:hidden;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;
-  padding:16px 10px 14px;border-radius:18px;color:inherit;text-decoration:none;
+/* ===== About：簽名條（延伸 hero 主視覺） ===== */
+.about-sig{
+  margin-top:var(--spacing--40);display:flex;align-items:center;gap:16px;
+  padding:14px 18px;border-radius:18px;
   background:var(--glass);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--glass-border);box-shadow:var(--glass-shadow), var(--glass-inset);
-  transition:transform .25s,box-shadow .25s}
-.dna-item::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--c-accent);opacity:.9}
-.dna-item::after{content:"";position:absolute;width:140px;height:140px;right:-50px;top:-50px;border-radius:50%;background:radial-gradient(closest-side,var(--c-glow),transparent 70%);opacity:.5;pointer-events:none;transition:opacity .3s,transform .3s}
-.dna-item:hover{transform:translateY(-3px);text-decoration:none;box-shadow:0 20px 44px rgba(35,51,99,.16), var(--glass-inset)}
-.dna-item:hover::after{opacity:.9;transform:scale(1.15)}
-.dna-item .pillar-ico{width:40px;height:40px;border-radius:12px;margin:0}
-.dna-item .pillar-ico svg{width:20px;height:20px}
-.dna-item b{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--primary);position:relative}
-.dna-item small{font-size:12px;line-height:1.45;color:var(--text-secondary);position:relative}
-[data-theme="dark"] .dna-item b{color:#cfe0f2}
-@media(max-width:420px){.about-dna{grid-template-columns:1fr}.dna-item{flex-direction:row;text-align:left;padding:12px 14px}.dna-item small br{display:none}}
+  border:1px solid var(--glass-border);box-shadow:var(--glass-shadow), var(--glass-inset)}
+.sig-ring{position:relative;flex:none;width:46px;height:46px;border-radius:50%;
+  background:conic-gradient(from 0deg,#4A9CBF,#6a5cff,#f2a541,#4ad3a6,#4A9CBF);animation:spin 12s linear infinite}
+.sig-ring::before{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--bg)}
+.sig-ring::after{content:"";position:absolute;inset:15px;border-radius:50%;background:linear-gradient(135deg,#4A9CBF,#6a5cff);box-shadow:0 0 0 4px rgba(74,156,191,.18)}
+.sig-text{display:flex;flex-direction:column;gap:3px;min-width:0}
+.sig-text b{font-size:15px;font-weight:800;letter-spacing:.22em;line-height:1.2;
+  background:linear-gradient(135deg,#1a274a 20%,#233363 55%,#2E7EA6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sig-text small{font-size:12.5px;color:var(--text-secondary);letter-spacing:.02em}
+[data-theme="dark"] .sig-ring::before{background:#131a30}
+[data-theme="dark"] .sig-text b{background:linear-gradient(135deg,#dbe6ff 15%,#9fc3e8 55%,#4A9CBF 100%);-webkit-background-clip:text;background-clip:text}
+@media (prefers-reduced-motion: reduce){.sig-ring{animation:none}}
 
 /* ===== 主軸 cards：accent 版（icon 磚 + 配色光暈） ===== */
 .pillar.accent{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:var(--spacing--20)}
@@ -489,7 +489,10 @@ details.year-block summary .count{font-size:14px;font-weight:500;color:var(--tex
 .contact h2{color:#fff}
 .contact p{color:rgba(246,246,246,.82);max-width:620px}
 .contact .eyebrow{color:rgba(246,246,246,.6)}
-.contact-links{display:flex;flex-wrap:wrap;gap:var(--spacing--30);justify-content:center}
+.contact-links{display:flex;flex-direction:column;align-items:center;gap:14px}
+.contact-sub{display:flex;flex-wrap:wrap;gap:var(--spacing--30);justify-content:center}
+.contact-links .chip{display:inline-flex;align-items:center;height:42px;font-family:inherit;cursor:pointer}
+.contact-links .chip--primary{height:50px}
 .contact-links .chip{
   font-size:15px;color:rgba(246,246,246,.9);
   background:rgba(255,255,255,.08);
