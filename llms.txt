@@ -45,3 +45,4 @@
 
 - 首頁（關於我、教學主軸、線上課程、出版著作、授課經歷、顧問服務、常見問題、聯絡方式）：https://www.visualization.tw/
 - 歷年企業內訓與授課紀錄：https://www.visualization.tw/training.html
+- English summary page：https://www.visualization.tw/en/
