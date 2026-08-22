@@ -86,7 +86,22 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
   border:5px solid rgba(255,255,255,.85);
   box-shadow:0 24px 60px rgba(35,51,99,.25), inset 0 1px 0 rgba(255,255,255,.9);
 }
-.hero .eyebrow{margin-bottom:0}
+.hero::before{content:"";position:absolute;left:50%;top:-40px;width:min(860px,100vw);height:560px;transform:translateX(-50%);border-radius:50%;pointer-events:none;z-index:-1;
+  background:radial-gradient(closest-side,rgba(74,156,191,.22),rgba(74,156,191,.06) 55%,transparent 72%)}
+.hero-avatar-wrap{position:relative;width:176px;height:176px;border-radius:50%;flex:none;animation:floaty 6.5s ease-in-out infinite}
+.hero-avatar-wrap::before{content:"";position:absolute;inset:-34px;border-radius:50%;z-index:-1;filter:blur(10px);
+  background:radial-gradient(closest-side,rgba(74,156,191,.55),rgba(106,92,255,.25) 55%,transparent 72%)}
+.hero-avatar-wrap::after{content:"";position:absolute;inset:-5px;border-radius:50%;z-index:-1;
+  background:conic-gradient(from 0deg,#4A9CBF,#6a5cff,#f2a541,#4ad3a6,#4A9CBF);animation:spin 10s linear infinite}
+.hero-avatar-wrap .hero-avatar{width:100%;height:100%;animation:none;border-color:var(--bg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero .eyebrow{margin-bottom:0;display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;font-size:12px;
+  background:var(--glass);border:1px solid var(--glass-border);box-shadow:0 8px 24px rgba(35,51,99,.08), var(--glass-inset);
+  backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}
+.hero .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#4A9CBF,#6a5cff);box-shadow:0 0 0 3px rgba(74,156,191,.18)}
+.hero-sub b{font-weight:700;color:var(--primary-mid)}
+.hero-sub .hero-sub-tag{display:block;margin-top:4px;font-size:.9em;opacity:.9}
+.btn--hero{background:linear-gradient(135deg,#2c4180 0%,#2E7EA6 60%,#4A9CBF 100%);background-size:200% auto;animation:shine 7s ease-in-out infinite;box-shadow:0 14px 34px rgba(46,126,166,.38), inset 0 1px 0 rgba(255,255,255,.28)}
 .hero h1{
   font-size:clamp(40px,5.6vw,64px);font-weight:700;line-height:1.05;letter-spacing:-.03em;
   background:linear-gradient(135deg,#1a274a 20%,#233363 55%,#2E7EA6 100%);
@@ -436,7 +451,7 @@ body::before{z-index:-2}
 .reveal.in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
 .pillar.reveal.in:hover,.course-card.reveal.in:hover{transform:translateY(-5px)}
 @media (prefers-reduced-motion: reduce){
-  .hero h1,.hero-avatar{animation:none}
+  .hero h1,.hero-avatar,.hero-avatar-wrap,.hero-avatar-wrap::after,.btn--hero{animation:none}
   .reveal{opacity:1;transform:none}
   #particles{display:none}
 }
@@ -636,6 +651,9 @@ nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
 [data-theme="dark"] button.chip--btn::after{color:#7fb0d0}
 [data-theme="dark"] .btn--ghost{color:#cfe0f2}
 [data-theme="dark"] .eyebrow{color:#7fb0d0}
+[data-theme="dark"] .hero::before{background:radial-gradient(closest-side,rgba(74,156,191,.26),rgba(106,92,255,.1) 55%,transparent 72%)}
+[data-theme="dark"] .hero-avatar-wrap::before{background:radial-gradient(closest-side,rgba(74,156,191,.6),rgba(106,92,255,.3) 55%,transparent 72%)}
+[data-theme="dark"] .hero-sub b{color:#9fc3e8}
 [data-theme="dark"] .about-text p{color:#c9cdda}
 [data-theme="dark"] .edu-list li + li{border-top-color:rgba(255,255,255,.08)}
 [data-theme="dark"] .edu-degree{color:#9fc3e8}
