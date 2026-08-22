@@ -7,7 +7,7 @@
 - 姓名：彭其捷（Jack Peng）
 - 身分：講師、作家、顧問；知識遊牧工作室（Knowmad Studio）創辦人；台灣大學資料分析與決策社導師
 - 專長：Tableau 資料視覺化、ChatGPT／生成式 AI 職場應用、AI × Excel／Python 數據分析、數據思維與數據決策、Web UX 與體驗設計
-- 學歷：國立臺灣大學地理環境資源學系博士候選人（空間分析與 GIS）；國立交通大學資訊管理研究所碩士（資料探勘）；國立中正大學資訊管理學系學士
+- 學歷：國立臺灣大學地理環境資源學系博士候選人（空間分析與 GIS）；國立交通大學資訊管理研究所碩士（資料探勘）；國立中正大學資訊管理學系學士（輔系經濟學系、電子商務與資訊安全學程）
 - 經歷：數據分析師、數據專案經理、前端工程師、使用者體驗顧問
 - 聯絡：foxfirejack@gmail.com；Line ID：divaka
 - 網站：https://www.visualization.tw/（個人）、https://knowmad.tw/（知識遊牧工作室官網）、https://www.tableau.tw/（Tableau 部落格）、https://hahow.in/@foxfirejack（Hahow 講師頁）
