@@ -196,6 +196,7 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
 .course-meta strong{color:var(--text)}
 .course-price{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
 .course-price .price{font-weight:700;font-size:20px;color:var(--primary)}
+.course-price .price-orig{font-weight:400;font-size:13px;color:var(--text-secondary);text-decoration:line-through;margin-left:4px}
 .badge{
   display:inline-block;padding:4px 12px;border-radius:999px;
   font-size:12px;font-weight:600;
