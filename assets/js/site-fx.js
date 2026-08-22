@@ -63,7 +63,7 @@
 /* 點擊複製（data-copy="要複製的文字"）＋ 底部提示 */
 (function(){
   let toast, timer;
-  function showToast(msg){
+  function showToast(msg, anchor){
     if (!toast){
       toast = document.createElement('div');
       toast.className = 'copy-toast';
@@ -72,6 +72,19 @@
       document.body.appendChild(toast);
     }
     toast.textContent = msg;
+    /* 貼在被點的元素正上方（空間不夠就放下方），一定看得到 */
+    toast.classList.remove('show', 'below');
+    if (anchor){
+      const r = anchor.getBoundingClientRect();
+      toast.style.left = (r.left + r.width / 2) + 'px';
+      const above = r.top > 64;
+      toast.style.top = (above ? r.top - 12 : r.bottom + 12) + 'px';
+      toast.classList.toggle('below', !above);
+    } else {
+      toast.style.left = '50%';
+      toast.style.top = (innerHeight - 40) + 'px';
+    }
+    void toast.offsetWidth;
     toast.classList.add('show');
     clearTimeout(timer);
     timer = setTimeout(() => toast.classList.remove('show'), 2200);
@@ -94,8 +107,8 @@
     const text = el.getAttribute('data-copy');
     el.classList.add('copied');
     setTimeout(() => el.classList.remove('copied'), 1200);
-    showToast('已複製 ' + text + ' ✓');
+    showToast('已複製 ' + text + ' ✓', el);
     const ok = await copyText(text);
-    if (!ok) showToast('複製失敗，請手動選取：' + text);
+    if (!ok) showToast('複製失敗，請手動選取：' + text, el);
   });
 })();
