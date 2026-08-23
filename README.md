@@ -60,10 +60,32 @@ Logo/                 知識遊牧 logo
    把清單預先渲染成靜態 HTML 寫進 index／training 的 `#timeline-wrap`（兩個 `<!-- prerender -->` 標記之間），讓不跑 JS 的爬蟲（GPTBot 等）也看得到；瀏覽器載入後 JS 仍會重繪並接手篩選。
 3. commit index.html、training.html、trainings.js
 
-> 已安裝 pre-commit hook 會自動做第 2 步；新 clone 後執行 `sh scripts/install-hooks.sh` 重新安裝。
+> 已安裝 pre-commit hook 會自動做第 2 步（並順帶更新 `dateModified`／`lastmod`）；新 clone 後執行 `sh scripts/install-hooks.sh` 重新安裝。
 
 ### 新增圖片
 放進 `assets/img`／`assets/logos`（建議 webp），寫好 `<img>` 後執行 `python3 scripts/add-img-dimensions.py` 自動補 `width/height`（防止版面跳動）。SVG 會略過。
+
+### 結構化資料的更新時間（自動）
+`index.html`／`en/index.html`／`training.html` 的 JSON-LD 都有 `dateModified`，`sitemap.xml` 有 `lastmod`。**pre-commit hook 會自動更新，平常不用手動改。**
+
+`scripts/update-modified-dates.py` 的規則：
+
+| 你改了什麼 | 會被更新的頁面 |
+|---|---|
+| `index.html` | 首頁 |
+| `en/index.html` | 英文頁 |
+| `training.html` | 授課紀錄頁 |
+| `assets/data/trainings.js` | 首頁＋授課紀錄頁（英文頁沒有這份資料） |
+| 其他 `assets/**`（CSS／JS／圖） | 三頁全部 |
+
+手動執行：
+
+```
+python3 scripts/update-modified-dates.py --all      # 三頁全更新
+python3 scripts/update-modified-dates.py --check    # 只檢查格式（CI／除錯用）
+```
+
+> ⚠️ `dateModified` 一定要用**完整 ISO 8601 含時區**（`2026-08-23T19:44:00+08:00`）。只寫日期 `2026-08-23` 會被 Google 判為「datetime 值無效」——Search Console 曾因此回報過 Profile Page 結構化資料錯誤。`sitemap.xml` 的 `lastmod` 則用純日期即可（W3C Datetime 規範允許）。
 
 ### 更新線上課程數字
 Hahow 學員數／評價數目前分散在：`index.html` 課程卡、`index.html` JSON-LD、`en/index.html`、`llms.txt`。改一處請四處同步。

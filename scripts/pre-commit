@@ -2,6 +2,7 @@
 # Git pre-commit hook（由 scripts/install-hooks.sh 安裝到 .git/hooks/pre-commit）
 # 1) 改了 assets/data/trainings.js 就自動重跑預渲染，並把 index.html / training.html 一起加進 commit
 # 2) 新增圖片時自動補 width/height
+# 3) 自動把變更頁面的 JSON-LD dateModified 與 sitemap.xml 的 lastmod 更新為當下時間
 cd "$(git rev-parse --show-toplevel)" || exit 1
 if git diff --cached --name-only | grep -q '^assets/data/trainings.js$'; then
   echo "[pre-commit] trainings.js 有變更 → 重新預渲染授課紀錄"
@@ -10,5 +11,15 @@ if git diff --cached --name-only | grep -q '^assets/data/trainings.js$'; then
 fi
 if git diff --cached --name-only | grep -qE '^(index|training)\.html$|^en/index\.html$'; then
   python3 scripts/add-img-dimensions.py >/dev/null 2>&1 && git add index.html training.html
+fi
+# 放最後跑：前兩步可能又改動了 HTML，這裡才能蓋上最新時間戳
+CHANGED=$(git diff --cached --name-only)
+if [ -n "$CHANGED" ]; then
+  # shellcheck disable=SC2086
+  TOUCHED=$(python3 scripts/update-modified-dates.py $CHANGED) || exit 1
+  if [ -n "$TOUCHED" ]; then
+    echo "[pre-commit] 更新 dateModified / lastmod → $(echo "$TOUCHED" | tr '\n' ' ')"
+    echo "$TOUCHED" | xargs git add
+  fi
 fi
 exit 0
