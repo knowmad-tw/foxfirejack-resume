@@ -393,8 +393,8 @@ nav{position:sticky;top:14px;z-index:100;background:transparent;pointer-events:n
   border-color:rgba(46,126,166,.45);
   box-shadow:0 16px 34px rgba(35,51,99,.16), var(--glass-inset);
 }
-.logo-wall img{max-height:44px;max-width:100%;object-fit:contain;filter:grayscale(1);opacity:.85;transition:filter .25s,opacity .25s,transform .25s}
-.logo-wall .logo-cell:hover img{filter:none;opacity:1;transform:translateY(-11px) scale(.86)}
+.logo-wall img{max-height:44px;max-width:100%;object-fit:contain;opacity:.95;transition:opacity .25s,transform .25s}
+.logo-wall .logo-cell:hover img{opacity:1;transform:translateY(-11px) scale(.86)}
 .logo-wall .logo-cell::after{
   content:attr(data-name);
   position:absolute;left:8px;right:8px;bottom:7px;
