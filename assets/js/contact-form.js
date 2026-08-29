@@ -1,11 +1,9 @@
 /**
  * CONTACT 表單：瀏覽器直打知識遊牧代寄 API（免登入、免 API Key）。
  * 規格見 mail-api.md。收件人鎖定 knowledge.nomads.tw2@gmail.com。
- * 失敗時退回 mailto，讓訪客仍能寄到 foxfirejack@gmail.com。
  */
 (function () {
   const MAIL_API_URL = 'https://knowmad-mail-backend.onrender.com/api/mail/send';
-  const TO_EMAIL = 'foxfirejack@gmail.com';
   const TIMEOUT_MS = 60000;
 
   function clip(s, n) {
@@ -41,12 +39,18 @@
     };
   }
 
-  function mailtoFallback(payload) {
-    const mail = buildMail(payload);
-    location.href =
-      'mailto:' + TO_EMAIL +
-      '?subject=' + encodeURIComponent(mail.subject) +
-      '&body=' + encodeURIComponent(mail.content);
+  function explainError(err) {
+    const msg = err && err.message ? String(err.message) : '';
+    if (err && err.name === 'AbortError') {
+      return '送出逾時。寄信服務剛睡醒時可能要等 30～50 秒，請再按一次送出。';
+    }
+    if (err && err.status >= 400 && err.status < 500 && msg) {
+      return '送出失敗：' + msg;
+    }
+    if (/Failed to fetch|NetworkError|Load failed|Failed to load/i.test(msg)) {
+      return '送出失敗：瀏覽器無法連到寄信服務（跨網域被擋或網路中斷）。請用 http://localhost:8931 開啟本頁，不要直接開 HTML 檔。';
+    }
+    return msg ? '送出失敗：' + msg : '送出失敗，請稍後再試，或加 Line：divaka';
   }
 
   async function postOnce(mail, signal) {
@@ -58,9 +62,19 @@
     });
     const data = await res.json().catch(function () { return {}; });
     if (!res.ok) {
-      throw new Error(data.detail || ('HTTP ' + res.status));
+      const err = new Error(data.detail || ('HTTP ' + res.status));
+      err.status = res.status;
+      throw err;
     }
     return data;
+  }
+
+  function shouldRetry(err) {
+    if (!err) return false;
+    if (err.name === 'AbortError') return true;
+    if (err.status >= 500) return true;
+    if (!err.status && /Failed to fetch|NetworkError|Load failed/i.test(err.message || '')) return true;
+    return false;
   }
 
   async function send(payload) {
@@ -73,6 +87,7 @@
         return await postOnce(mail, ctrl.signal);
       } catch (err) {
         lastError = err;
+        if (!shouldRetry(err) || attempt === 1) break;
       } finally {
         clearTimeout(timer);
       }
@@ -126,12 +141,8 @@
         form.reset();
         setNote(note, '已送出，我會盡快回覆你。', 'ok');
       } catch (err) {
-        mailtoFallback(payload);
-        setNote(
-          note,
-          '線上送出暫時失敗，已開啟郵件軟體。也可直接來信 <a href="mailto:foxfirejack@gmail.com">foxfirejack@gmail.com</a> 或加 Line：divaka',
-          'error'
-        );
+        console.error('[contact-form]', err);
+        setNote(note, explainError(err), 'error');
       } finally {
         btn.disabled = false;
         btn.textContent = prev;
