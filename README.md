@@ -93,6 +93,14 @@ Hahow 學員數／評價數目前分散在：`index.html` 課程卡、`index.htm
 ### 英文頁
 `en/index.html` 是摘要而非逐句翻譯，共用同一套 CSS；hreflang 在兩頁 `<head>` 與 `sitemap.xml` 都有宣告。
 
+### 聯絡表單寄信
+首頁與授課紀錄頁的 CONTACT 表單由 `assets/js/contact-form.js` 直打代寄 API（免 API Key）。`https://www.visualization.tw` 與本機 localhost 已在 CORS 白名單。
+
+- 規格：`mail-api.md`
+- 收件人鎖定 `knowledge.nomads.tw2@gmail.com`（API 不能指定其他人）
+- 姓名／Email 會寫進內文 Markdown，方便回覆
+- 第一次呼叫若遇到 Render 冷啟動，可能要等 30～50 秒；失敗會退回 mailto
+
 ## 本機預覽
 
 ```

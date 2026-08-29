@@ -48,7 +48,7 @@
   });
 })();
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=20260824a">
+<link rel="stylesheet" href="assets/css/site.css?v=20260829a">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -255,6 +255,29 @@
     <div class="eyebrow" style="color:rgba(246,246,246,.6)">CONTACT</div>
     <h2>想為團隊安排一場內訓？</h2>
     <p>課程可依產業情境與團隊程度客製，從半天工作坊到系列課程都能規劃。歡迎來信聊聊需求。</p>
+    <form class="contact-form" id="contact-form" novalidate>
+      <div class="contact-form-row">
+        <div class="contact-field">
+          <label for="cf-name">個人姓名 <b>*</b></label>
+          <input id="cf-name" name="name" type="text" required maxlength="50" autocomplete="name" placeholder="怎麼稱呼您？">
+        </div>
+        <div class="contact-field">
+          <label for="cf-email">個人 Email <b>*</b></label>
+          <input id="cf-email" name="email" type="email" required maxlength="100" autocomplete="email" placeholder="you@example.com">
+        </div>
+      </div>
+      <div class="contact-field">
+        <label for="cf-subject">主旨 <b>*</b></label>
+        <input id="cf-subject" name="subject" type="text" required maxlength="120" placeholder="例如：企業內訓邀約">
+      </div>
+      <div class="contact-field">
+        <label for="cf-content">內容 <b>*</b></label>
+        <textarea id="cf-content" name="content" required maxlength="3000" rows="5" placeholder="想邀約的主題、對象人數、預計時間等，都歡迎先簡單描述"></textarea>
+      </div>
+      <input class="cf-hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="contact-submit" type="submit">送出洽詢</button>
+      <p class="contact-form-note" role="status" aria-live="polite">送出後我會盡快回覆。也可以直接來信或加 Line。</p>
+    </form>
     <p class="contact-mail">✉️ <a href="mailto:foxfirejack@gmail.com" data-copy="foxfirejack@gmail.com" title="點一下複製 Email">foxfirejack@gmail.com</a></p>
   </div>
 </section>
@@ -270,5 +293,6 @@
 
 <canvas id="particles" aria-hidden="true"></canvas>
 <script src="assets/js/site-fx.js?v=20260823c"></script>
+<script src="assets/js/contact-form.js?v=20260829b"></script>
 </body>
 </html>

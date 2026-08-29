@@ -54,7 +54,7 @@
   });
 })();
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=20260824a">
+<link rel="stylesheet" href="assets/css/site.css?v=20260829a">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -1095,6 +1095,29 @@
     <div class="eyebrow" style="color:rgba(246,246,246,.6)">CONTACT</div>
     <h2>企業內訓・演講邀約・顧問合作</h2>
     <p>Tableau 工具導入、數據分析與視覺化、系統 UI/UX 設計、人工智慧導入——歡迎來信洽談。</p>
+    <form class="contact-form" id="contact-form" novalidate>
+      <div class="contact-form-row">
+        <div class="contact-field">
+          <label for="cf-name">個人姓名 <b>*</b></label>
+          <input id="cf-name" name="name" type="text" required maxlength="50" autocomplete="name" placeholder="怎麼稱呼您？">
+        </div>
+        <div class="contact-field">
+          <label for="cf-email">個人 Email <b>*</b></label>
+          <input id="cf-email" name="email" type="email" required maxlength="100" autocomplete="email" placeholder="you@example.com">
+        </div>
+      </div>
+      <div class="contact-field">
+        <label for="cf-subject">主旨 <b>*</b></label>
+        <input id="cf-subject" name="subject" type="text" required maxlength="120" placeholder="例如：企業內訓邀約">
+      </div>
+      <div class="contact-field">
+        <label for="cf-content">內容 <b>*</b></label>
+        <textarea id="cf-content" name="content" required maxlength="3000" rows="5" placeholder="想邀約的主題、對象人數、預計時間等，都歡迎先簡單描述"></textarea>
+      </div>
+      <input class="cf-hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="contact-submit" type="submit">送出洽詢</button>
+      <p class="contact-form-note" role="status" aria-live="polite">送出後我會盡快回覆。也可以直接來信或加 Line。</p>
+    </form>
     <div class="contact-links">
       <button class="chip chip--primary" type="button" data-copy="foxfirejack@gmail.com" title="點一下複製 Email">✉️ foxfirejack@gmail.com</button>
       <div class="contact-sub">
@@ -1124,6 +1147,7 @@
 </div>
 <canvas id="particles" aria-hidden="true"></canvas>
 <script src="assets/js/site-fx.js?v=20260823c"></script>
+<script src="assets/js/contact-form.js?v=20260829b"></script>
 <script>
 (function(){
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !matchMedia('(pointer:fine)').matches) return;
