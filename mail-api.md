@@ -86,7 +86,7 @@ https://knowmad-mail-backend.onrender.com/api/mail/send
 |------|------|
 | 數量 | 不設上限。實際天花板是 Gmail 每日投遞量 |
 | 省略／空值 | 寄給寄件帳號自己 `knowledge.nomads.tw2@gmail.com` |
-| 多位收件人 | 一律用**密件副本**，收件人之間看不到彼此的 email |
+| 多位收件人 | 全部放在 `to`，沒有副本／密件副本；收件人看得到彼此 |
 | 格式 | 任一筆不像 email 就整個請求 `400`，不會「寄成功幾封」 |
 
 本站表單固定寄給 `foxfirejack@gmail.com` 與 `knowledge.nomads.tw2@gmail.com`。
@@ -157,7 +157,7 @@ await fetch("https://knowmad-mail-backend.onrender.com/api/mail/send", {
 | `400` | 少填或格式不對（`project`／`source_url`／`subject`／`to`）、Gmail 寄送失敗 |
 | `CORS error` | 瀏覽器呼叫時，來源網域不在白名單 |
 
-`detail` 一定是可直接顯示給使用者的中文字串：
+`detail` 一定是可直接顯示給使用者的中文字串（字串，不是陣列）：
 
 ```json
 { "detail": "網址（source_url）需為 http:// 或 https:// 開頭的完整網址" }

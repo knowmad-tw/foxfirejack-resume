@@ -1,6 +1,6 @@
 /**
  * CONTACT 表單：瀏覽器直打知識遊牧代寄 API（免登入、免 API Key）。
- * 規格見 mail-api.md。收件人為 foxfirejack 與工作室信箱（多位一律走密件副本）。
+ * 規格見 mail-api.md。收件人為 foxfirejack 與工作室信箱，兩位都放在 to。
  * project／source_url 為必填，後端會把 project 加成主旨前綴、把兩者寫進信件頁腳。
  */
 (function () {

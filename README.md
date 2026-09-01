@@ -97,7 +97,7 @@ Hahow 學員數／評價數目前分散在：`index.html` 課程卡、`index.htm
 首頁與授課紀錄頁的 CONTACT 表單由 `assets/js/contact-form.js` 直打代寄 API（免 API Key）。`https://www.visualization.tw` 與本機 localhost 已在 CORS 白名單。
 
 - 規格：`mail-api.md`
-- 收件人 `to` 固定為 `foxfirejack@gmail.com` 與 `knowledge.nomads.tw2@gmail.com`（多位一律走密件副本）
+- 收件人 `to` 固定為 `foxfirejack@gmail.com` 與 `knowledge.nomads.tw2@gmail.com`（都放 to，不用 cc／bcc）
 - 必填 `project`（`visualization.tw 聯絡表單`）與 `source_url`（目前頁面網址）；後端會把 `project` 加成主旨前綴 `[visualization.tw 聯絡表單] …`，並把來源寫進信件頁腳
 - 姓名／Email 會寫進內文 Markdown，方便回覆
 - 第一次呼叫若遇到 Render 冷啟動，可能要等 30～50 秒；失敗會顯示原因，不會開啟郵件軟體
