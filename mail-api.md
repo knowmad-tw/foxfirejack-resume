@@ -17,14 +17,14 @@
 | 項目 | 說明 |
 |------|------|
 | 寄件帳號 | `knowledge.nomads.tw2@gmail.com`（固定，不可改） |
-| 收件人 | **鎖定**為同一信箱，**不能指定其他人** |
+| 收件人 | 由你用 `to` 指定，數量不限；省略就寄給寄件帳號自己 |
 | 內文格式 | Markdown（後端會轉成 HTML） |
 | 認證 | **免登入、免 API Key**——直接 `POST` 即可 |
-| 頁腳 | 系統會自動加上「此信件由系統自動發送。」 |
+| 自報家門 | **必填**：`project`（哪一個專案）＋ `source_url`（哪一個網址） |
+| 主旨 | 寄出時自動變成 `[專案名稱] 你的主旨` |
+| 頁腳 | 系統會自動加上 `project`／`source_url`，表明這封信的來源 |
 
-典型用途：表單送出通知、訂單／報名通知、系統事件提醒——信會進工作室信箱。
-
-> **不要**用這支 API 寄給你自己的使用者。收件人無法指定。若需要寄給通訊錄裡的群組，請走發信後台的「群組發信」，不是這支外部 API。
+寄件人一律顯示為「自動發信系統 `<knowledge.nomads.tw2@gmail.com>`」，不能改成你的網域。收件人按回覆會回到工作室信箱，不是回到你。
 
 ---
 
@@ -56,6 +56,9 @@ https://knowmad-mail-backend.onrender.com/api/mail/send
 
 ```json
 {
+  "to": ["someone@example.com"],
+  "project": "visualization.tw 聯絡表單",
+  "source_url": "https://www.visualization.tw/contact",
   "subject": "通知標題",
   "content": "內文支援 **Markdown**\n\n也可使用 {date} 佔位符（會換成當天日期，Asia/Taipei）。"
 }
@@ -63,12 +66,47 @@ https://knowmad-mail-backend.onrender.com/api/mail/send
 
 | 欄位 | 型別 | 必填 | 說明 |
 |------|------|:----:|------|
-| `subject` | string | ✓ | 主旨；支援 `{date}` → `YYYY-MM-DD` |
-| `content` | string | ✗ | 內文 Markdown；同樣支援 `{date}` |
+| `to` | string \| string[] | ✗ | 收件人 email，數量不限。省略就寄給寄件帳號自己（見下） |
+| `project` | string | ✓ | 呼叫端專案名稱，80 字內。會加在主旨前面成為 `[專案名稱] 主旨` |
+| `source_url` | string | ✓ | 呼叫端網址，300 字內，需 `http://` 或 `https://` 開頭 |
+| `subject` | string | ✓ | 主旨；支援佔位符（見下） |
+| `content` | string | ✗ | 內文 Markdown；同樣支援佔位符。省略就只會有系統頁腳 |
 
-不可傳 `to`／收件人欄位；傳了也會被忽略（收件人永遠鎖定）。
+### 收件人 `to`
 
-表單會把「個人姓名／個人 Email」寫進 `content`，主旨加上 `【visualization.tw 洽詢】` 前綴。
+三種寫法都可以，會依 email 小寫去重：
+
+```json
+"to": "someone@example.com"                    // 單一
+"to": "a@example.com, b@example.com"           // 逗號分隔
+"to": ["a@example.com", "b@example.com"]       // 陣列
+```
+
+| 規則 | 說明 |
+|------|------|
+| 數量 | 不設上限。實際天花板是 Gmail 每日投遞量 |
+| 省略／空值 | 寄給寄件帳號自己 `knowledge.nomads.tw2@gmail.com` |
+| 多位收件人 | 一律用**密件副本**，收件人之間看不到彼此的 email |
+| 格式 | 任一筆不像 email 就整個請求 `400`，不會「寄成功幾封」 |
+
+本站表單固定寄給 `foxfirejack@gmail.com` 與 `knowledge.nomads.tw2@gmail.com`。
+
+### 佔位符
+
+`subject` 與 `content` 都會做代換，時間一律以**寄出當下**的 Asia/Taipei 計算。
+
+| 佔位符 | 代換成 | 範例 |
+|--------|--------|------|
+| `{date}` | 西元日期 | `2026-09-01` |
+| `{date_cn}` | 中文日期 | `2026年9月1日` |
+| `{time}` | 時分 | `14:30` |
+| `{datetime}` | 日期＋時分 | `2026-09-01 14:30` |
+| `{weekday}` | 星期 | `週二` |
+| `{year}` / `{month}` / `{day}` | 年／月／日（不補零） | `2026` / `9` / `1` |
+| `{sender}` | 寄件帳號 | `knowledge.nomads.tw2@gmail.com` |
+| `{task}` | 需求名稱 | `代寄信 API` |
+
+**認不得的 `{xxx}` 會原樣保留**，不會被清掉也不會報錯。所以內文放 JSON 或程式碼片段是安全的，只要別剛好用到上表的名字。
 
 ---
 
@@ -80,6 +118,9 @@ https://knowmad-mail-backend.onrender.com/api/mail/send
 curl -X POST https://knowmad-mail-backend.onrender.com/api/mail/send \
   -H "Content-Type: application/json" \
   -d '{
+    "to": ["someone@example.com"],
+    "project": "visualization.tw 聯絡表單",
+    "source_url": "https://www.visualization.tw/contact",
     "subject": "通知 {date}",
     "content": "各位好：\n\n這是一封測試信。"
   }'
@@ -94,6 +135,9 @@ await fetch("https://knowmad-mail-backend.onrender.com/api/mail/send", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
+    to: ["someone@example.com"],        // 省略就寄給工作室信箱
+    project: "visualization.tw 聯絡表單",
+    source_url: window.location.href,   // 或寫死實際頁面網址
     subject: "通知 {date}",
     content: "各位好：\n\n表單已送出。",
   }),
@@ -110,8 +154,22 @@ await fetch("https://knowmad-mail-backend.onrender.com/api/mail/send", {
 
 | HTTP | 說明 |
 |------|------|
-| `400` | 缺主旨、Gmail 寄送失敗等；body 為 `{ "detail": "…" }` |
+| `400` | 少填或格式不對（`project`／`source_url`／`subject`／`to`）、Gmail 寄送失敗 |
 | `CORS error` | 瀏覽器呼叫時，來源網域不在白名單 |
+
+`detail` 一定是可直接顯示給使用者的中文字串：
+
+```json
+{ "detail": "網址（source_url）需為 http:// 或 https:// 開頭的完整網址" }
+```
+
+```js
+const res = await fetch(url, { /* … */ });
+if (!res.ok) {
+  const { detail } = await res.json();
+  throw new Error(detail);          // detail 一定是可直接顯示的中文字串
+}
+```
 
 伺服器端（curl、Node、Python）不受 CORS 限制。
 
@@ -131,6 +189,8 @@ await fetch("https://knowmad-mail-backend.onrender.com/api/mail/send", {
 
 要加其他正式網域，請通知後端在 `CORS_DEFAULT_ORIGINS` 或環境變數 `CORS_ORIGINS` 補上（完整字串、**不要**尾斜線）。
 
+> CORS 白名單管的是「**哪個網頁**可以用瀏覽器打這支 API」，不是認證機制；伺服器端呼叫不受影響。
+
 ---
 
 ## 與發信後台的差別
@@ -138,14 +198,29 @@ await fetch("https://knowmad-mail-backend.onrender.com/api/mail/send", {
 | | 外部代寄 `POST /api/mail/send` | 後台各需求（需登入） |
 |--|-------------------------------|----------------------|
 | 認證 | 免登入 | Firebase 登入 |
-| 收件人 | 鎖定固定信箱 | 可設群組／個別 email |
+| 收件人 | `to` 指定，數量不限 | 可設群組／個別 email |
 | 內容 | 每次呼叫傳入 | 存在需求設定／範本 |
-| 記錄 | `task_id=api-mail`，`mode=api` | `manual`／`test`／`schedule` |
+| 記錄 | `task_id=api-mail`、`mode=api`，另存 `project`／`source_url`／來源 IP | `manual`／`test`／`schedule` |
 
 ---
 
 ## 注意
 
-- Render 免費方案閒置會休眠，**第一次呼叫可能要等 30～50 秒**。
+### 內文裡的連結會被改寫成追蹤網址
+
+`content` 寫的連結，寄出後在信裡會變成轉址網址，點下去才跳到原網址：
+
+```
+你寫的：   https://www.example.com/form
+信裡變成： https://knowmad-mail-backend.onrender.com/r/api-mail/{記錄ID}/0
+```
+
+這是點擊追蹤，點擊數會記在發信記錄。原網址不會遺失、轉址是 302。**不想被改寫**就別用連結語法，直接把網址當純文字寫（前後不要有 `<>` 或 `[]()`）。
+
+信末頁腳的「來源網址」本來就是純文字，不會被改寫也不會被追蹤。
+
+### 其他
+
+- Render 免費方案閒置會休眠，**第一次呼叫可能要等 30～50 秒**。建議 timeout 設 60 秒以上，並且失敗重試一次。
 - 內文是 Markdown，不是 HTML；連結、粗體、列表可直接寫。
-- 錯誤格式一律 `{ "detail": "訊息" }` + 非 2xx。
+- 錯誤格式一律 `{ "detail": "訊息" }`（字串）+ 非 2xx。

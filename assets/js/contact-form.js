@@ -1,10 +1,19 @@
 /**
  * CONTACT 表單：瀏覽器直打知識遊牧代寄 API（免登入、免 API Key）。
- * 規格見 mail-api.md。收件人鎖定 knowledge.nomads.tw2@gmail.com。
+ * 規格見 mail-api.md。收件人為 foxfirejack 與工作室信箱（多位一律走密件副本）。
+ * project／source_url 為必填，後端會把 project 加成主旨前綴、把兩者寫進信件頁腳。
  */
 (function () {
   const MAIL_API_URL = 'https://knowmad-mail-backend.onrender.com/api/mail/send';
+  const MAIL_TO = ['foxfirejack@gmail.com', 'knowledge.nomads.tw2@gmail.com'];
+  const PROJECT = 'visualization.tw 聯絡表單';
+  const FALLBACK_SOURCE_URL = 'https://www.visualization.tw/#contact';
   const TIMEOUT_MS = 60000;
+
+  function sourceUrl() {
+    const href = (window.location && window.location.href) || '';
+    return /^https?:\/\//i.test(href) ? href.slice(0, 300) : FALLBACK_SOURCE_URL;
+  }
 
   function clip(s, n) {
     return String(s || '').trim().slice(0, n);
@@ -22,7 +31,10 @@
 
   function buildMail(payload) {
     return {
-      subject: '【visualization.tw 洽詢】' + payload.subject,
+      to: MAIL_TO,
+      project: PROJECT,
+      source_url: sourceUrl(),
+      subject: payload.subject,
       content: [
         'visualization.tw 聯絡表單有新的洽詢。',
         '',
@@ -33,8 +45,6 @@
         payload.content,
         '',
         '請直接回覆對方的 Email。',
-        '',
-        '來源：https://www.visualization.tw/#contact',
       ].join('\n'),
     };
   }
