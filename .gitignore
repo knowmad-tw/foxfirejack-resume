@@ -1,3 +1,10 @@
 .DS_Store
 .claude/
 .remember/
+
+# 本機素材與客戶專案資料：公開 repo（GitHub Pages）不放（2026-10-17）
+# 影片與原始檔太大（單檔可達數百 MB，超過 GitHub 100MB 上限），客戶文件不公開
+__history_data/
+__template_data/
+_project/
+_video/
