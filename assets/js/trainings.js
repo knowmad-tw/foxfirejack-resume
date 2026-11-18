@@ -10,6 +10,36 @@
 
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+  /* 一列有多堂課時（用「・」隔開），拆成一堂一行；括號與引號裡的「・」不拆。
+     結尾的「（4 場）」「（多場）」屬於整列，另外放在最後一行。*/
+  function splitTopic(topic){
+    let note = '';
+    const m = topic.match(/（(\d+ 場|多場)）$/);
+    let body = m ? topic.slice(0, -m[0].length) : topic;
+    const parts = [];
+    let depth = 0, buf = '';
+    for (const ch of body) {
+      if ('（(「『'.includes(ch)) depth++;
+      else if ('）)」』'.includes(ch)) depth = Math.max(0, depth - 1);
+      if (ch === '・' && depth === 0) { parts.push(buf.trim()); buf = ''; continue; }
+      buf += ch;
+    }
+    parts.push(buf.trim());
+    if (parts.length < 2) return null;
+    if (m) note = m[1];
+    return { parts, note };
+  }
+
+  function topicHtml(topic, year){
+    /* 2015 – 2020 的舊條目用「・」接身分與年份，不拆 */
+    const sp = parseInt(year, 10) >= 2021 ? splitTopic(topic) : null;
+    if (!sp) return '<span class="tl-topic">' + esc(topic) + '</span>';
+    return '<span class="tl-topic tl-multi">' +
+      sp.parts.map(p => '<span class="tl-sub">' + esc(p) + '</span>').join('') +
+      (sp.note ? '<span class="tl-note">' + (sp.note === '多場' ? '多場' : '共 ' + esc(sp.note)) + '</span>' : '') +
+      '</span>';
+  }
+
   /* 把資料畫成 details.year-block 結構
      opts.openAll：全部年份預設展開
      opts.openYears：指定預設展開的年份陣列（例：['2026','2025']） */
@@ -24,7 +54,7 @@
       const lis = y.items.map(i =>
         '<li data-ind="' + (IND[i.org] || 'other') + '">' +
         '<span class="tl-org">' + esc(i.org) + '</span>' +
-        '<span class="tl-topic">' + esc(i.topic) + '</span>' +
+        topicHtml(i.topic, y.year) +
         (i.role ? '<span class="tl-role">' + esc(i.role) + '</span>' : '') +
         '</li>'
       ).join('');
